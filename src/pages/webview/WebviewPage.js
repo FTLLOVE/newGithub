@@ -12,7 +12,7 @@ export default class WebviewPage extends PureComponent {
 		let url = this.props.navigation.state.params.link;
 		return (
 			<WebView
-				style={{ flex: 1 }}
+				style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
 				source={{ uri: url }}
 			/>
 		)

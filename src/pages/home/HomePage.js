@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, FlatList, RefreshControl } from 'react-native';
+import { View, FlatList, RefreshControl, Text } from 'react-native';
 import { connect } from 'react-redux';
 import {
 	fetchArticleList,
@@ -66,8 +66,10 @@ class HomePage extends PureComponent {
 
 	onRefresh = () => {
 		this.setState({ refreshing: true });
-		Promise.all([fetchArticleList(), fetchHomeBannerList()]);
-		this.setState({ refreshing: false });
+		setTimeout(() => {
+			Promise.all([fetchArticleList(), fetchHomeBannerList()]);
+			this.setState({ refreshing: false });
+		}, 1000);
 	};
 
 	onEndReached = () => {

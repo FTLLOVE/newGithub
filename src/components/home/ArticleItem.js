@@ -4,12 +4,13 @@ import Color from '../../Color';
 import { styles as globalStyles } from '../../style/globalStyles'
 import { getRealDP as dp, DEVICE_WIDTH } from '../../utils/ScreenUtil'
 import NavigationUtil from '../../utils/NavigationUtil';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class ArticleItem extends PureComponent {
 
 	handlePress = () => {
 		let { item } = this.props
-		//TODO 跳转外部页面
+		// alert(item.link)
 		// NavigationUtil.goPage("WebviewPage", {
 		// 	"link": item.link
 		// })
@@ -25,8 +26,30 @@ class ArticleItem extends PureComponent {
 			>
 				<View style={styles.itemWrapper}>
 					<View style={styles.itemLeftWrapper}>
-						<Text style={styles.title} numberOfLines={3}>{item.title}</Text>
-						<Text style={styles.desc} numberOfLines={3}>{item.desc ? item.desc : ""}</Text>
+						<View>
+							<Text style={styles.title} numberOfLines={3}>{item.title}</Text>
+							<Text style={styles.desc} numberOfLines={3}>{item.desc ? item.desc : ""}</Text>
+						</View>
+						<View style={styles.likeStyle}>
+							<TouchableOpacity onPress={() => {
+								alert("收藏")
+							}}>
+								<Icon
+									name={'ios-heart'}
+									size={dp(45)}
+									color={Color.ICONBGCOLOR}
+								/>
+							</TouchableOpacity>
+							<TouchableOpacity style={{ marginLeft: dp(10) }}>
+								<Icon
+									name={'ios-time'}
+									size={dp(45)}
+									color={Color.ICONBGCOLOR}
+								/>
+							</TouchableOpacity>
+							<Text style={styles.shareStyle}>{item.niceShareDate}</Text>
+							<Text style={styles.shareStyle}>{item.shareUser}</Text>
+						</View>
 					</View>
 					<View style={styles.itemRightWrapper}>
 						{
@@ -94,6 +117,14 @@ const styles = StyleSheet.create({
 		fontSize: dp(24),
 		textAlign: 'center',
 		fontWeight: "bold"
+	},
+	likeStyle: {
+		flexDirection: "row",
+		alignItems: 'center',
+	},
+	shareStyle: {
+		marginLeft: dp(10),
+		color: Color.TEXTLIGNTCOLOR
 	}
 })
 

@@ -49,7 +49,7 @@ class NavBar extends PureComponent {
 				{/* right */}
 				{
 					rightIcon ? (
-						<TouchableOpacity >
+						<TouchableOpacity>
 							<View style={[styles.iconWrapper]}>
 								<Icon name={rightIcon} size={dp(40)} color={Color.WhiteColor} />
 							</View>
@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 	},
 
 	titleWrapper: {
-		width: DEVICE_WIDTH - dp(200),
+		width: DEVICE_WIDTH - dp(170),
 		alignItems: 'center'
 	},
 
