@@ -8,20 +8,19 @@ import {
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { DEVICE_WIDTH, getRealDP as dp, getStatusBarHeight, isAndroid } from '../../utils/ScreenUtil'
-import Colors from '../../Color'
-import { connect } from 'react-redux'
 import Color from '../../Color'
-import { color } from 'react-native-reanimated'
+import { showToast } from '../../utils/Utility'
 import NavigationUtil from '../../utils/NavigationUtil'
+
 
 class NavBar extends PureComponent {
 
 	handleLeftPress = () => {
-		NavigationUtil.goPage("WebviewPage")
+		NavigationUtil.goBack()
 	}
 
 	render() {
-		const { leftIcon, rightIcon, titleView, title } = this.props
+		const { leftIcon, rightIcon, titleView, title, rightPress } = this.props
 		return (
 			<View style={[styles.container, { backgroundColor: Color.PrimaryColor }]}>
 				{/* left */}
@@ -30,7 +29,11 @@ class NavBar extends PureComponent {
 						{
 							leftIcon ? (
 								<Icon name={leftIcon} size={dp(50)} color={Color.WhiteColor} />
-							) : <Image source={require('../../resources/avatar.png')} style={styles.avatar} />
+							) : (
+									<Icon
+										name={isAndroid ? 'arrow-back' : 'chevron-back-outline'} size={dp(50)} color={Color.WhiteColor}
+									/>
+								)
 						}
 					</View>
 				</TouchableOpacity>
@@ -49,7 +52,7 @@ class NavBar extends PureComponent {
 				{/* right */}
 				{
 					rightIcon ? (
-						<TouchableOpacity>
+						<TouchableOpacity onPress={rightPress}>
 							<View style={[styles.iconWrapper]}>
 								<Icon name={rightIcon} size={dp(40)} color={Color.WhiteColor} />
 							</View>
@@ -89,7 +92,7 @@ const styles = StyleSheet.create({
 	},
 
 	titleWrapper: {
-		width: DEVICE_WIDTH - dp(170),
+		width: DEVICE_WIDTH - dp(160),
 		alignItems: 'center'
 	},
 

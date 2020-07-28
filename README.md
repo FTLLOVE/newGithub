@@ -43,4 +43,12 @@ export default createAppContainer(rootStack);
 ```
 
 
+> 公共弹框
+```
+import Pop from 'rn-global-modal'
+
+Pop.show(
+			<View style={{ height: dp(400), width: DEVICE_WIDTH * 0.8, backgroundColor: Color.WhiteColor, borderRadius: dp(10) }} />
+			, { animationType: 'fade', maskClosable: true, onMaskClose: () => { } })
+```
 

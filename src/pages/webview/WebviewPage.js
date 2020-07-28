@@ -1,20 +1,40 @@
 import React, { PureComponent } from 'react'
 import { View, Text } from 'react-native'
 import { WebView } from 'react-native-webview'
+import { styles as globalStyle } from '../../style/globalStyles'
+import NavBar from '../../components/common/NavBar'
+import ProgressBar from '../../components/common/ProgressBar'
 
 export default class WebviewPage extends PureComponent {
 
-	constructor(props) {
-		super(props)
+
+	state = {
+		progress: 0
 	}
 
 	render() {
-		let url = this.props.navigation.state.params.link;
+		const { navigation } = this.props
+		const link = navigation.getParam('link')
+		const title = navigation.getParam("title")
 		return (
-			<WebView
-				style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-				source={{ uri: url }}
-			/>
+			<View style={globalStyle.container}>
+				<NavBar
+					title={title}
+					rightIcon={'ios-share-social'}
+					rightPress={() => {
+						alert("分享")
+					}}
+				/>
+				<ProgressBar progress={this.state.progress} />
+				<WebView
+					source={{ uri: link }}
+					onLoadProgress={({ nativeEvent }) => {
+						this.setState({
+							progress: nativeEvent.progress
+						})
+					}}
+				/>
+			</View>
 		)
 	}
 }

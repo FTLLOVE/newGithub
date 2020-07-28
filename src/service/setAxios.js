@@ -2,7 +2,6 @@
  * 初始化axios
  */
 import axios from 'axios'
-import qs from 'querystring'
 const BASE_URL = "https://www.wanandroid.com/"
 const headers = {
 	Accept: 'application/json;charset=utf-8',

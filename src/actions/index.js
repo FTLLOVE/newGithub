@@ -25,7 +25,6 @@ export async function fetchArticleList() {
  * @returns {Promise<void>}
  */
 export async function fetchArticleListMore(page) {
-	debugger
 	await API.getArticleList(page)
 		.then(res => {
 			const action = actionCreator.getArticleListMore(res.data);

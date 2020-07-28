@@ -10,10 +10,10 @@ class ArticleItem extends PureComponent {
 
 	handlePress = () => {
 		let { item } = this.props
-		// alert(item.link)
-		// NavigationUtil.goPage("WebviewPage", {
-		// 	"link": item.link
-		// })
+		NavigationUtil.goPage("WebviewPage", {
+			"link": item.link,
+			"title": item.title
+		})
 	}
 
 	render() {
@@ -28,7 +28,8 @@ class ArticleItem extends PureComponent {
 					<View style={styles.itemLeftWrapper}>
 						<View>
 							<Text style={styles.title} numberOfLines={3}>{item.title}</Text>
-							<Text style={styles.desc} numberOfLines={3}>{item.desc ? item.desc : ""}</Text>
+							<Text style={styles.desc} numberOfLines={3}>{item.desc}</Text>
+
 						</View>
 						<View style={styles.likeStyle}>
 							<TouchableOpacity onPress={() => {
@@ -48,7 +49,7 @@ class ArticleItem extends PureComponent {
 								/>
 							</TouchableOpacity>
 							<Text style={styles.shareStyle}>{item.niceShareDate}</Text>
-							<Text style={styles.shareStyle}>{item.shareUser}</Text>
+							<Text style={styles.shareStyle}>{item.shareUser || item.author}</Text>
 						</View>
 					</View>
 					<View style={styles.itemRightWrapper}>

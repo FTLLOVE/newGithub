@@ -51,7 +51,7 @@ const rootStack = createStackNavigator({
 	},
 });
 
-const BottomTabNavigator = createAppContainer(rootStack);
+const AppNavigator = createAppContainer(rootStack);
 
-export default BottomTabNavigator;
+export default AppNavigator;
 

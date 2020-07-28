@@ -10,7 +10,6 @@ export default class NavigationUtil {
 	 */
 	static goPage(page, params) {
 		const navigation = NavigationUtil.navigation
-		console.log(navigation)
 		if (!navigation) {
 			return null;
 		}
@@ -23,10 +22,10 @@ export default class NavigationUtil {
 	}
 
 	/**
-	 * 返回上一页
-	 * @param {*} navigation 
+	 *  返回上一页
 	 */
-	static goBack(navigation) {
-
+	static goBack() {
+		const navigation = NavigationUtil.navigation
+		navigation.pop()
 	}
 }
