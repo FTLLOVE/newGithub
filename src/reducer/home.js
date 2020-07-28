@@ -10,17 +10,19 @@ const defaultState = {
 
 export default (state = defaultState, action) => {
 	switch (action.type) {
+		case actionTypes.GET_HOME_BANNER:
+			debugger
+			return {
+				...state,
+				homeBannerList: action.data
+			}
 		case actionTypes.GET_ARTICLE_LIST:
 			return {
 				...state,
 				articleList: action.data.datas,
 				page: 1,
-				isFullData: action.data.curPage === action.data.pageCount
-			}
-		case actionTypes.GET_HOME_BANNER:
-			return {
-				...state,
-				homeBannerList: action.data
+				isFullData: action.data.curPage === action.data.pageCount, // 只有当前页码=总页数，显示加载全部
+				isRenderFooter: !!action.data.total, // 只有total=0的时候不渲染底部
 			}
 		case actionTypes.GET_ARTICLE_LIST_MORE:
 			let newArticleList = state.articleList.concat(action.data.datas);
@@ -28,7 +30,8 @@ export default (state = defaultState, action) => {
 				...state,
 				page: ++state.page,
 				articleList: newArticleList,
-				isFullData: action.data.datas.length === 0
+				isFullData: action.data.datas.length === 0,
+				isRenderFooter: !!action.data.total, // 只有total=0的时候不渲染底部
 			}
 		case actionTypes.HANDLE_FAILURE:
 			return state

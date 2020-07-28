@@ -2,105 +2,118 @@
  * TODO  首页banner
  */
 import React, { PureComponent } from 'react'
-import { Text, View, Image, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, Image, StyleSheet, TouchableOpacity, Touchable } from 'react-native'
 import { getRealDP as dp, DEVICE_WIDTH } from '../../utils/ScreenUtil'
 import Swiper from 'react-native-swiper'
 import Color from '../../Color'
+import PropTypes from 'prop-types'
+import NavigationUtil from '../../utils/NavigationUtil'
 
-export default class Banner extends PureComponent {
+
+class Banner extends PureComponent {
 
 	constructor(props) {
 		super(props)
 		this.state = {
-			currentIndex: 0
+			currentBannerIndex: 0
 		}
-		this.handleIndexChange = this.handleIndexChange.bind(this)
+		this.handlePress = this.handlePress.bind(this)
+		this.getCurrentImgIndex = this.getCurrentImgIndex.bind(this);
+
 	}
 
-	handleIndexChange(index) {
-		this.setState({
-			currentIndex: index
+	handlePress(el) {
+		let { title, url } = el
+		NavigationUtil.goPage("WebviewPage", {
+			"link": url,
+			"title": title
 		})
 	}
 
-	handlePress = () => {
+	getCurrentImgIndex(imageIndex) {
+		this.setState({ currentBannerIndex: imageIndex })
 	}
 
 	render() {
-		let { homeBannerList } = this.props
-		if (!homeBannerList.length) {
-			return (
-				<View style={styles.container}></View>
-			)
+		const { bannerArr } = this.props;
+		if (!bannerArr.length) {
+			return <View style={styles.defaultBg} />;
 		}
 		return (
-			<View style={styles.container}>
+			<View style={styles.bannerContainer}>
 				<Swiper
-					style={{ height: imageHeight }}
+					style={styles.imgCarousel}
 					horizontal={true}
 					loop={true}
 					autoplay={true}
 					showsPagination={false}
-					removeClippedSubviews={false} // 处理IOS切换页面白屏
-					onIndexChanged={this.handleIndexChange}
+					removeClippedSubviews={false} // 处理ios切换页面白屏
+					onIndexChanged={this.getCurrentImgIndex}
 				>
-					{
-						homeBannerList.map(item => {
-							return (
-								<TouchableOpacity
-									key={item.id}
-									activeOpacity={1}
-									onPress={this.handlePress}
-								>
-									<Image
-										source={{ uri: item.imagePath }}
-										style={styles.imageContainer}
-									/>
-								</TouchableOpacity>
-							)
-						})
-					}
+					{bannerArr.map(el => {
+						return (
+							<TouchableOpacity key={el.id} activeOpacity={1} onPress={() => this.handlePress(el)} >
+								<Image style={styles.imgBanner} source={{ uri: el.imagePath }} />
+							</TouchableOpacity>
+						)
+					})}
 				</Swiper>
-				<View style={styles.bannerHeight}>
-					<Text style={styles.bannerText} numberOfLines={1} >
-						{homeBannerList[this.state.currentIndex].title}
+				{/* <View style={styles.bannerHint}>
+					<Text style={styles.bannerText} numberOfLines={1}>
+						{bannerArr[this.state.currentBannerIndex].title}
 					</Text>
 					<Text style={styles.bannerText}>
-						{this.state.currentIndex + 1}/{homeBannerList.length}
+						{this.state.currentBannerIndex + 1}/{bannerArr.length}
 					</Text>
-				</View>
+				</View> */}
 			</View>
-		)
+		);
+
 	}
 }
 
-const imageHeight = dp(380)
+const defaultProps = {
+	bannerArr: []
+}
+
+Banner.defaultProps = defaultProps
+
+export default Banner;
+
+
+const imageHeight = dp(380);
 const styles = StyleSheet.create({
-	container: {
+	defaultBg: {
 		height: imageHeight,
 		backgroundColor: Color.PAGEBGCOLOR,
-		marginBottom: dp(20)
 	},
-	imageContainer: {
+	bannerContainer: {
+		height: imageHeight,
+		backgroundColor: Color.PAGEBGCOLOR,
+	},
+	imgCarousel: {
+		height: imageHeight,
+	},
+	imgBanner: {
 		width: DEVICE_WIDTH,
 		height: imageHeight,
-		resizeMode: 'stretch'
+		resizeMode: 'stretch',
 	},
-	bannerHeight: {
-		height: dp(50),
-		backgroundColor: 'rgba(0,0,0,0.3)',
+	bannerHint: {
 		flex: 1,
 		width: DEVICE_WIDTH,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		position: 'absolute',
-		left: 0,
+		paddingHorizontal: dp(20),
+		backgroundColor: 'rgba(0,0,0,0.3)',
+		height: dp(50),
 		bottom: 0,
-		paddingHorizontal: dp(10)
+		left: 0,
+		position: 'absolute',
 	},
 	bannerText: {
-		color: Color.WhiteColor,
-		fontSize: dp(28)
-	}
-})
+		color: Color.WHITE,
+		fontSize: dp(28),
+	},
+});

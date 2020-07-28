@@ -9,7 +9,7 @@ import WxArticlePage from './pages/wxArticle/WxArticlePage';
 import GuidePage from './pages/guide/GuidePage';
 import ProjectPage from './pages/project/ProjectPage';
 import { getRealDP as dp } from './utils/ScreenUtil';
-import BottomTabBarItem from './components/common/bottomTabBarItem/BottomTabBarItem';
+import BottomTabBarItem from './components/common/BottomTabBarItem';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import WebviewPage from './pages/webview/WebviewPage'

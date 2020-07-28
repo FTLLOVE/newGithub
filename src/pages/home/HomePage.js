@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, FlatList, RefreshControl, Text } from 'react-native';
+import { View, FlatList, RefreshControl, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import {
 	fetchArticleList,
@@ -12,6 +12,9 @@ import Banner from '../../components/home/Banner';
 import NavigationUtil from '../../utils/NavigationUtil';
 import ArticleItem from '../../components/home/ArticleItem';
 import Color from '../../Color';
+import { getRealDP as dp, DEVICE_HEIGHT } from '../../utils/ScreenUtil'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import ListFooter from '../../components/common/ListFooter'
 
 class HomePage extends PureComponent {
 
@@ -19,21 +22,30 @@ class HomePage extends PureComponent {
 		super(props);
 		this.state = {
 			refreshing: false,
+			isShowTop: false
 		};
 		this.renderItem = this.renderItem.bind(this);
+		this.renderHeader = this.renderHeader.bind(this)
+		this._onScroll = this._onScroll.bind(this);
+		this.handleScrollTop = this.handleScrollTop.bind(this);
+		this.renderFooter = this.renderFooter.bind(this)
 	}
 
 	render() {
 		NavigationUtil.navigation = this.props.navigation;
-		let { articleList, homeBannerList } = this.props;
+		let { articleList } = this.props;
 		return (
 			<View style={globalStyle.container}>
 				{/* 头部导航 */}
 				<NavBar title={'WanAndroid'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} />
 				<FlatList
+					ref={comp => {
+						this.flatListRef = comp
+					}}
 					keyExtractor={(item) => item.id.toString()}
 					data={articleList}
-					ListHeaderComponent={this.renderHeader(homeBannerList)}
+					ListHeaderComponent={this.renderHeader}
+					ListFooterComponent={this.renderFooter}
 					renderItem={(item, index) => this.renderItem(item, index)}
 					showsVerticalScrollIndicator={false}
 					refreshControl={
@@ -48,7 +60,19 @@ class HomePage extends PureComponent {
 					}
 					onEndReachedThreshold={0.2}
 					onEndReached={this.onEndReached}
+					onScroll={this._onScroll}
 				/>
+				{
+					this.state.isShowTop ? (
+						<TouchableOpacity onPress={this.handleScrollTop} activeOpacity={1}>
+							<View style={styles.fixAndroidStyle}>
+								<View style={styles.topStyle}>
+									<Icon name={'rocket'} size={dp(60)} color={Color.WhiteColor} />
+								</View>
+							</View>
+						</TouchableOpacity>
+					) : null
+				}
 			</View>
 		);
 	}
@@ -62,6 +86,21 @@ class HomePage extends PureComponent {
 			fetchArticleList(),
 			fetchHomeBannerList(),
 		]);
+	}
+
+	_onScroll(e) {
+		const scrollY = e.nativeEvent.contentOffset.y;
+		if (scrollY > DEVICE_HEIGHT) {
+			this.setState({ isShowTop: true })
+		} else {
+			this.setState({ isShowTop: false })
+		}
+	}
+
+	handleScrollTop() {
+		this.flatListRef && this.flatListRef.scrollToOffset({
+			animated: true, offset: 0
+		})
 	}
 
 	onRefresh = () => {
@@ -80,10 +119,20 @@ class HomePage extends PureComponent {
 		fetchArticleListMore(page)
 	}
 
-	renderHeader(homeBannerList) {
+	renderHeader() {
+		const { homeBannerList } = this.props;
 		return (
-			<Banner homeBannerList={homeBannerList} />
+			<View>
+				<Banner bannerArr={homeBannerList} />
+				<View style={{ height: dp(20) }} />
+			</View>
 		);
+	}
+
+	renderFooter() {
+		return (
+			<ListFooter />
+		)
 	}
 
 	renderItem({ item }) {
@@ -102,11 +151,32 @@ class HomePage extends PureComponent {
 const mapStateToProps = (state) => {
 	return {
 		articleList: state.home.articleList,
-		homeBannerList: state.home.homeBannerList,
 		page: state.home.page,
-		isFullData: state.home.isFullData
+		isFullData: state.home.isFullData,
+		homeBannerList: state.home.homeBannerList
 	};
 };
+
+const styles = StyleSheet.create({
+	fixAndroidStyle: {
+		position: 'absolute',
+		bottom: dp(80),
+		right: dp(45),
+		width: dp(120),
+		height: dp(120),
+		backgroundColor: 'rgba(0,0,0,0.005)'
+	},
+	topStyle: {
+		width: dp(120),
+		height: dp(120),
+		borderRadius: dp(60),
+		justifyContent: 'center',
+		alignItems: 'center',
+		opacity: 1,
+		backgroundColor: "#f26966"
+	}
+
+})
 
 
 export default connect(mapStateToProps, null)(HomePage);

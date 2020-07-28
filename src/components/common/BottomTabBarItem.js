@@ -4,8 +4,8 @@
 import React, { PureComponent } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { DEVICE_WIDTH, getRealDP as dp, isAndroid } from '../../../utils/ScreenUtil';
-import Color from '../../../Color';
+import { DEVICE_WIDTH, getRealDP as dp } from '../../utils/ScreenUtil';
+import Color from '../../Color';
 
 class BottomTabBarItem extends PureComponent {
 	render() {

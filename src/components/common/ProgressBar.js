@@ -3,7 +3,9 @@ import { ProgressBarAndroid, ProgressViewIOS } from 'react-native'
 import { getRealDP as dp, isAndroid } from '../../utils/ScreenUtil'
 import Color from '../../Color'
 
-
+/**
+ * 进度条
+ */
 class ProgressBar extends PureComponent {
 
 	state = {

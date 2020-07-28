@@ -5,32 +5,28 @@ import { styles as globalStyles } from '../../style/globalStyles'
 import { getRealDP as dp, DEVICE_WIDTH } from '../../utils/ScreenUtil'
 import NavigationUtil from '../../utils/NavigationUtil';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+/**
+ * 文章item
+ */
 class ArticleItem extends PureComponent {
 
-	handlePress = () => {
-		let { item } = this.props
-		NavigationUtil.goPage("WebviewPage", {
-			"link": item.link,
-			"title": item.title
-		})
+	constructor(props) {
+		super(props)
+		this.handlePress = this.handlePress.bind(this)
 	}
 
 	render() {
 		let { item } = this.props
 		return (
-			<TouchableOpacity
+			<View
 				style={styles.container}
-				activeOpacity={0.9}
-				onPress={this.handlePress}
 			>
 				<View style={styles.itemWrapper}>
 					<View style={styles.itemLeftWrapper}>
-						<View>
+						<TouchableOpacity onPress={this.handlePress} activeOpacity={0.9}>
 							<Text style={styles.title} numberOfLines={3}>{item.title}</Text>
 							<Text style={styles.desc} numberOfLines={3}>{item.desc}</Text>
-
-						</View>
+						</TouchableOpacity>
 						<View style={styles.likeStyle}>
 							<TouchableOpacity onPress={() => {
 								alert("收藏")
@@ -70,8 +66,16 @@ class ArticleItem extends PureComponent {
 						}
 					</View>
 				</View>
-			</TouchableOpacity>
+			</View>
 		)
+	}
+
+	handlePress() {
+		let { item } = this.props
+		NavigationUtil.goPage("WebviewPage", {
+			"link": item.link,
+			"title": item.title
+		})
 	}
 }
 

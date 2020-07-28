@@ -19,7 +19,7 @@ export function getRealDP(designPx) {
 export function getStatusBarHeight() {
 	return Platform.select({
 		ios: ifIphoneX(44, 20),
-		android: StatusBar.height
+		android: StatusBar.currentHeight
 	})
 }
 

@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import {
-	Image,
 	StyleSheet,
 	Text,
 	TouchableOpacity,
@@ -9,10 +8,11 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons'
 import { DEVICE_WIDTH, getRealDP as dp, getStatusBarHeight, isAndroid } from '../../utils/ScreenUtil'
 import Color from '../../Color'
-import { showToast } from '../../utils/Utility'
 import NavigationUtil from '../../utils/NavigationUtil'
 
-
+/**
+ * 自定义顶部导航
+ */
 class NavBar extends PureComponent {
 
 	handleLeftPress = () => {
