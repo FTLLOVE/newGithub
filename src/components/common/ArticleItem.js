@@ -15,6 +15,7 @@ class ArticleItem extends PureComponent {
 		this.handlePress = this.handlePress.bind(this)
 	}
 
+
 	render() {
 		let { item } = this.props
 		return (
@@ -44,7 +45,7 @@ class ArticleItem extends PureComponent {
 									color={Color.ICONBGCOLOR}
 								/>
 							</TouchableOpacity>
-							<Text style={styles.shareStyle}>{item.niceShareDate}</Text>
+							<Text style={styles.shareStyle}>{item.niceDate}</Text>
 							<Text style={styles.shareStyle}>{item.shareUser || item.author}</Text>
 						</View>
 					</View>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, FlatList, RefreshControl, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, FlatList, RefreshControl, TouchableOpacity, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { getRealDP as dp, DEVICE_HEIGHT } from '../../utils/ScreenUtil'
 import Color from '../../Color'
@@ -58,9 +58,7 @@ class CommonFlatList extends React.PureComponent {
 					this.state.isShowTop ? (
 						<TouchableOpacity onPress={this.handleScrollTop} activeOpacity={1}>
 							<View style={styles.fixAndroidStyle}>
-								<View style={styles.topStyle}>
-									<Icon name={'rocket'} size={dp(60)} color={Color.WhiteColor} />
-								</View>
+								<Image source={require("../../resources/toTop.png")} resizeMode={'stretch'} style={styles.image} />
 							</View>
 						</TouchableOpacity>
 					) : null
@@ -82,14 +80,9 @@ const styles = StyleSheet.create({
 		height: dp(120),
 		backgroundColor: 'rgba(0,0,0,0.005)'
 	},
-	topStyle: {
-		width: dp(120),
-		height: dp(120),
-		borderRadius: dp(60),
-		justifyContent: 'center',
-		alignItems: 'center',
-		opacity: 1,
-		backgroundColor: Color.PrimaryColor
+	image: {
+		width: dp(150),
+		height: dp(150)
 	}
 })
 

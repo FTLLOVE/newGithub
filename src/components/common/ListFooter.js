@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
 	footer: {
 		flexDirection: 'row',
 		width: DEVICE_WIDTH,
-		height: dp(80),
+		height: dp(60),
 		alignItems: "center",
 		justifyContent: "center"
 	}
