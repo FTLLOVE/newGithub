@@ -12,7 +12,9 @@ import { getRealDP as dp } from './utils/ScreenUtil';
 import BottomTabBarItem from './components/common/BottomTabBarItem';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
-import WebviewPage from './pages/webview/WebviewPage'
+import WebviewPage from './pages/webview/WebviewPage';
+import SystemArticlePage from './pages/system/SystemArticlePage'
+
 
 const tabNavigator = createBottomTabNavigator(
 	{
@@ -39,10 +41,11 @@ const tabNavigator = createBottomTabNavigator(
 
 const rootStack = createStackNavigator({
 	Home: tabNavigator,
+	SystemArticlePage: SystemArticlePage,
 	WebviewPage: WebviewPage
 }, {
 	initialRouteName: 'Home',
-	mode: 'modal',
+	mode: 'fade',
 	navigationOptions: () => ({
 		gesturesEnabled: true,
 	}),

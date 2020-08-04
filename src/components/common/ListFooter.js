@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import { Text, View, StyleSheet, ActivityIndicator } from 'react-native'
-import { connect } from 'react-redux'
 import Color from '../../Color'
 import { DEVICE_WIDTH, getRealDP as dp } from '../../utils/ScreenUtil'
 
@@ -46,13 +45,7 @@ const styles = StyleSheet.create({
 	}
 })
 
-const mapStateToProps = (state) => {
-	return {
-		isFullData: state.home.isFullData,
-		isRenderFooter: state.home.isRenderFooter
-	}
-}
 
-export default connect(mapStateToProps, null)(ListFooter)
+export default ListFooter
 
 ListFooter.defaultProps = defaultProps

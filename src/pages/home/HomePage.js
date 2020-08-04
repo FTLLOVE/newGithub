@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, FlatList, RefreshControl, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 import {
 	fetchArticleList,
@@ -10,11 +10,10 @@ import { styles as globalStyle } from '../../style/globalStyles';
 import NavBar from '../../components/common/NavBar';
 import Banner from '../../components/home/Banner';
 import NavigationUtil from '../../utils/NavigationUtil';
-import ArticleItem from '../../components/home/ArticleItem';
-import Color from '../../Color';
 import { getRealDP as dp, DEVICE_HEIGHT } from '../../utils/ScreenUtil'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import ListFooter from '../../components/common/ListFooter'
+import CommonFlatList from '../../components/common/CommonFlatList'
+import ArticleItem from '../../components/common/ArticleItem'
 
 class HomePage extends PureComponent {
 
@@ -22,12 +21,9 @@ class HomePage extends PureComponent {
 		super(props);
 		this.state = {
 			refreshing: false,
-			isShowTop: false
 		};
 		this.renderItem = this.renderItem.bind(this);
 		this.renderHeader = this.renderHeader.bind(this)
-		this._onScroll = this._onScroll.bind(this);
-		this.handleScrollTop = this.handleScrollTop.bind(this);
 		this.renderFooter = this.renderFooter.bind(this)
 	}
 
@@ -38,41 +34,16 @@ class HomePage extends PureComponent {
 			<View style={globalStyle.container}>
 				{/* 头部导航 */}
 				<NavBar title={'WanAndroid'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} />
-				<FlatList
-					ref={comp => {
-						this.flatListRef = comp
-					}}
-					keyExtractor={(item) => item.id.toString()}
+				<CommonFlatList
 					data={articleList}
+					keyExtractor={(item) => item.id.toString()}
 					ListHeaderComponent={this.renderHeader}
 					ListFooterComponent={this.renderFooter}
-					renderItem={(item, index) => this.renderItem(item, index)}
-					showsVerticalScrollIndicator={false}
-					refreshControl={
-						<RefreshControl
-							refreshing={this.state.refreshing}
-							onRefresh={this.onRefresh}
-							tintColor={Color.PrimaryColor}
-							color={Color.PrimaryColor}
-							titleColor={Color.TEXTLIGNTCOLOR}
-							title={"玩命加载中"}
-						/>
-					}
-					onEndReachedThreshold={0.2}
+					renderItem={this.renderItem}
 					onEndReached={this.onEndReached}
-					onScroll={this._onScroll}
+					isRefreshing={this.state.refreshing}
+					toRefresh={this.onRefresh}
 				/>
-				{
-					this.state.isShowTop ? (
-						<TouchableOpacity onPress={this.handleScrollTop} activeOpacity={1}>
-							<View style={styles.fixAndroidStyle}>
-								<View style={styles.topStyle}>
-									<Icon name={'rocket'} size={dp(60)} color={Color.WhiteColor} />
-								</View>
-							</View>
-						</TouchableOpacity>
-					) : null
-				}
 			</View>
 		);
 	}
@@ -86,21 +57,6 @@ class HomePage extends PureComponent {
 			fetchArticleList(),
 			fetchHomeBannerList(),
 		]);
-	}
-
-	_onScroll(e) {
-		const scrollY = e.nativeEvent.contentOffset.y;
-		if (scrollY > DEVICE_HEIGHT) {
-			this.setState({ isShowTop: true })
-		} else {
-			this.setState({ isShowTop: false })
-		}
-	}
-
-	handleScrollTop() {
-		this.flatListRef && this.flatListRef.scrollToOffset({
-			animated: true, offset: 0
-		})
 	}
 
 	onRefresh = () => {
@@ -130,22 +86,17 @@ class HomePage extends PureComponent {
 	}
 
 	renderFooter() {
+		let { isFullData, isRenderFooter } = this.props
 		return (
-			<ListFooter />
+			<ListFooter isFullData={isFullData} isRenderFooter={isRenderFooter} />
 		)
 	}
 
 	renderItem({ item }) {
 		return (
-			<ArticleItem
-				item={item}
-			/>
+			<ArticleItem item={item} />
 		);
 	}
-
-	handlePress = () => {
-		NavigationUtil.goPage('WebviewPage');
-	};
 }
 
 const mapStateToProps = (state) => {
@@ -153,31 +104,10 @@ const mapStateToProps = (state) => {
 		articleList: state.home.articleList,
 		page: state.home.page,
 		isFullData: state.home.isFullData,
-		homeBannerList: state.home.homeBannerList
+		homeBannerList: state.home.homeBannerList,
+		isRenderFooter: state.home.isRenderFooter
 	};
 };
-
-const styles = StyleSheet.create({
-	fixAndroidStyle: {
-		position: 'absolute',
-		bottom: dp(80),
-		right: dp(45),
-		width: dp(120),
-		height: dp(120),
-		backgroundColor: 'rgba(0,0,0,0.005)'
-	},
-	topStyle: {
-		width: dp(120),
-		height: dp(120),
-		borderRadius: dp(60),
-		justifyContent: 'center',
-		alignItems: 'center',
-		opacity: 1,
-		backgroundColor: "#f26966"
-	}
-
-})
-
 
 export default connect(mapStateToProps, null)(HomePage);
 

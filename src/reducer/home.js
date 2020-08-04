@@ -11,7 +11,6 @@ const defaultState = {
 export default (state = defaultState, action) => {
 	switch (action.type) {
 		case actionTypes.GET_HOME_BANNER:
-			debugger
 			return {
 				...state,
 				homeBannerList: action.data

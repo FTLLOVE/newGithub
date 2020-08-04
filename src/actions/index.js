@@ -50,3 +50,35 @@ export async function fetchHomeBannerList() {
 		});
 }
 
+/**
+ * 获取系统列表
+ */
+export function fetchSystemList() {
+	return new Promise(async (resolve, reject) => {
+		await API.getSystemList()
+			.then(res => {
+				resolve(res.data)
+			})
+			.catch(err => {
+				reject(err)
+			})
+	})
+}
+
+/**
+ * 获取当前系统知识体系下面的文章列表
+ * @param {*} page 
+ * @param {*} cid 
+ */
+export function fetchSystemOfArticleList(cid, page = 0) {
+	return new Promise(async (resolve, reject) => {
+		await API.getSystemOfArticleList(page, cid)
+			.then(res => {
+				resolve(res.data)
+			})
+			.catch(err => {
+				reject(err)
+			})
+	})
+}
+

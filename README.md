@@ -10,7 +10,7 @@ react-native init MyApp --version 0.61.0
 
 ### 2. 创建底部导航
 
-#### 2.1 引入`react-navigation`插件
+#### 2.1 安装react-navigation`插件
 ```
 yarn add react-navigation@4.0
 expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
@@ -39,16 +39,5 @@ const rootStack = createStackNavigator({
 });
 
 export default createAppContainer(rootStack);
-
-```
-
-
-> 公共弹框
-```
-import Pop from 'rn-global-modal'
-
-Pop.show(
-			<View style={{ height: dp(400), width: DEVICE_WIDTH * 0.8, backgroundColor: Color.WhiteColor, borderRadius: dp(10) }} />
-			, { animationType: 'fade', maskClosable: true, onMaskClose: () => { } })
 ```
 

@@ -58,14 +58,6 @@ class Banner extends PureComponent {
 						)
 					})}
 				</Swiper>
-				{/* <View style={styles.bannerHint}>
-					<Text style={styles.bannerText} numberOfLines={1}>
-						{bannerArr[this.state.currentBannerIndex].title}
-					</Text>
-					<Text style={styles.bannerText}>
-						{this.state.currentBannerIndex + 1}/{bannerArr.length}
-					</Text>
-				</View> */}
 			</View>
 		);
 
