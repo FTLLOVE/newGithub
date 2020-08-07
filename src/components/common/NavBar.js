@@ -28,10 +28,10 @@ class NavBar extends PureComponent {
 					<View style={styles.iconWrapper}>
 						{
 							leftIcon ? (
-								<Icon name={leftIcon} size={dp(50)} color={Color.WhiteColor} />
+								<Icon name={leftIcon} size={dp(56)} color={Color.WhiteColor} />
 							) : (
 									<Icon
-										name={isAndroid ? 'arrow-back' : 'chevron-back-outline'} size={dp(50)} color={Color.WhiteColor}
+										name={isAndroid ? 'arrow-back' : 'chevron-back-outline'} size={dp(56)} color={Color.WhiteColor}
 									/>
 								)
 						}

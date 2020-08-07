@@ -16,3 +16,10 @@ export function getSystemOfArticleList(page, cid) {
 	return httpUtil.get(`article/list/${page}/json?cid=${cid}`)
 }
 
+export function getWxArticleList() {
+	return httpUtil.get(`wxarticle/chapters/json`)
+}
+
+export function getWxArticleListOfAuthor(page = 0, authorId) {
+	return httpUtil.get(`wxarticle/list/${authorId}/${page}/json`)
+}

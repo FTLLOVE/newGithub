@@ -1,5 +1,6 @@
-import React, {PureComponent} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import React, { PureComponent } from 'react'
+import { Text, View, StyleSheet } from 'react-native'
+
 
 class ProjectPage extends PureComponent {
 	render() {

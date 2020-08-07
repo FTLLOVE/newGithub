@@ -47,14 +47,14 @@ class CommonFlatList extends React.PureComponent {
 						<RefreshControl
 							refreshing={isRefreshing}
 							onRefresh={toRefresh}
+							colors={[Color.PrimaryColor]}
 							tintColor={Color.PrimaryColor}
-							colors={Color.PrimaryColor}
-							title={"玩命加载中"}
+							title={"努力加载中"}
 						/>
 					}
 					{...this.props}
 				/>
-				{
+				{/* {
 					this.state.isShowTop ? (
 						<TouchableOpacity onPress={this.handleScrollTop} activeOpacity={1}>
 							<View style={styles.fixAndroidStyle}>
@@ -62,7 +62,7 @@ class CommonFlatList extends React.PureComponent {
 							</View>
 						</TouchableOpacity>
 					) : null
-				}
+				} */}
 			</View>
 		)
 	}

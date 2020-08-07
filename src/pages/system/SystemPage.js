@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Text, View, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 import NavBar from '../../components/common/NavBar'
 import { styles as globalStyles } from '../../style/globalStyles'
 import { fetchSystemList } from '../../actions'
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
 		marginBottom: dp(20)
 	},
 	tabItemText: {
-		fontSize: dp(23),
+		fontSize: dp(25),
 		color: Color.WhiteColor
 	}
 })

@@ -1,15 +1,39 @@
-import React, {PureComponent} from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import { styles as globalStyles } from '../../style/globalStyles'
+import NavBar from '../../components/common/NavBar'
+import { connect } from 'react-redux'
+import { fetchWxArticleList, fetchArticleLoading } from '../../actions/index'
+import ArticleTabComponent from '../../components/common/ArticleTabComponent'
+import LoadingView from '../../components/common/LoadingView'
 
-class WxArticlePage extends PureComponent {
+/**
+ * 公众号
+ */
+class WxArticlePage extends Component {
+
+	componentDidMount() {
+		fetchArticleLoading(true)
+		fetchWxArticleList()
+	}
+
 	render() {
+		let { articleTabs, isLoading } = this.props
 		return (
-			<Text>
-				WxArticle
-			</Text>
-		);
+			<View style={globalStyles.container}>
+				<NavBar title={'公众号'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} />
+				<ArticleTabComponent articleTabs={articleTabs} />
+				<LoadingView isLoading={isLoading} />
+			</View>
+		)
 	}
 }
 
-const styles = StyleSheet.create({});
-export default WxArticlePage;
+const mapStateToProps = (state) => {
+	return {
+		articleTabs: state.wxArticle.articleTabs,
+		isLoading: state.wxArticle.isLoading
+	}
+}
+
+export default connect(mapStateToProps, null)(WxArticlePage)

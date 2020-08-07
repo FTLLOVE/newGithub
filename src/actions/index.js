@@ -44,6 +44,7 @@ export async function fetchHomeBannerList() {
 		.then(res => {
 			const action = actionCreator.getHomeBannerList(res.data);
 			store.dispatch(action);
+
 		})
 		.catch(err => {
 			store.dispatch(actionCreator.handleFailure());
@@ -82,3 +83,39 @@ export function fetchSystemOfArticleList(cid, page = 0) {
 	})
 }
 
+/**
+ * 获取公众号列表
+ */
+export async function fetchWxArticleList() {
+	await API.getWxArticleList()
+		.then(res => {
+			const action = actionCreator.getWxArticleList(res.data)
+			store.dispatch(action)
+		})
+}
+
+/**
+ * 获取公众号文章列表
+ * @param {*} authorId 
+ * @param {*} page 
+ */
+export function fetchWxArticleListOfAuthor(authorId, page = 0) {
+	return new Promise(async (resolve, reject) => {
+		await API.getWxArticleListOfAuthor(page, authorId)
+			.then(res => {
+				resolve(res.data)
+			})
+			.catch(err => {
+				reject(err)
+			})
+	})
+}
+
+/**
+ * 处理Loading
+ * @param {*} isLoading 
+ */
+export function fetchArticleLoading(isLoading) {
+	const action = actionCreator.fetchArticleLoading(isLoading)
+	store.dispatch(action)
+}
