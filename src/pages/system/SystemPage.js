@@ -6,6 +6,9 @@ import { fetchSystemList } from '../../actions'
 import CommonFlatList from '../../components/common/CommonFlatList'
 import SystemArticleItem from '../../components/system/SystemArticleItem'
 import { getRealDP as dp } from '../../utils/ScreenUtil'
+import { connect } from 'react-redux'
+import LoadingView from '../../components/common/LoadingView'
+import { fetchArticleLoading } from '../../actions'
 /**
  * 系统
  */
@@ -22,7 +25,9 @@ class SystemPage extends PureComponent {
 	}
 
 	componentDidMount() {
+		fetchArticleLoading(true)
 		fetchSystemList().then(res => {
+			fetchArticleLoading(false)
 			this.setState({
 				dataSource: res,
 			})
@@ -56,16 +61,17 @@ class SystemPage extends PureComponent {
 					toRefresh={this.toRefresh}
 					ListHeaderComponent={() => <View style={{ height: dp(20) }} />}
 				/>
+				<LoadingView isLoading={this.props.isLoading} />
 			</View>
 		)
 	}
 }
 
-const styles = StyleSheet.create({
-	itemWrapper: {
-		flex: 1,
-		alignItems: 'center'
-	}
-})
 
-export default SystemPage
+const mapStateToProps = (state) => {
+	return {
+		isLoading: state.wxArticle.isLoading
+	}
+}
+
+export default connect(mapStateToProps, null)(SystemPage)

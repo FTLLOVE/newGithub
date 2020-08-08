@@ -119,3 +119,17 @@ export function fetchArticleLoading(isLoading) {
 	const action = actionCreator.fetchArticleLoading(isLoading)
 	store.dispatch(action)
 }
+
+/**
+ * 获取项目列表
+ */
+export async function fetchProjectTree() {
+	await API.getProjectTree()
+		.then(res => {
+			const action = actionCreator.fetchProjectTree(res.data);
+			store.dispatch(action);
+		})
+		.catch(err => {
+			store.dispatch(actionCreator.handleFailure());
+		});
+}

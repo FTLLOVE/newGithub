@@ -21,7 +21,10 @@ class SystemArticleItem extends PureComponent {
 			}} >
 				<View style={styles.itemWrapper}>
 					<View style={styles.itemContent}>
-						<Text style={styles.title}>{item.name}</Text>
+						<View style={styles.topContent}>
+							<Text style={styles.title}>{item.name}</Text>
+							<Icon name={'doubleright'} size={dp(25)} color={'#ccc'} />
+						</View>
 						<View style={styles.content}>
 							<View style={styles.leftContent}>
 								{
@@ -34,7 +37,6 @@ class SystemArticleItem extends PureComponent {
 									})
 								}
 							</View>
-							<Icon name={'rightcircleo'} size={dp(45)} color={'#999999'} />
 						</View>
 					</View>
 				</View>
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		marginBottom: dp(20),
 		paddingHorizontal: dp(20),
-		paddingTop: dp(20),
+		paddingTop: dp(30),
 		paddingBottom: dp(10),
 		justifyContent: 'space-between',
 	},
@@ -72,7 +74,6 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	leftContent: {
-		width: dp(620),
 		flexWrap: 'wrap',
 		flexDirection: 'row',
 		paddingTop: dp(20)
@@ -88,6 +89,13 @@ const styles = StyleSheet.create({
 	tabBarItemTitle: {
 		fontSize: dp(28),
 		color: Color.WhiteColor
+	},
+	topContent: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
+		width: dp(680),
+		paddingHorizontal: dp(20)
 	}
 })
 

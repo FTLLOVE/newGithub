@@ -23,3 +23,7 @@ export function getWxArticleList() {
 export function getWxArticleListOfAuthor(page = 0, authorId) {
 	return httpUtil.get(`wxarticle/list/${authorId}/${page}/json`)
 }
+
+export function getProjectTree() {
+	return httpUtil.get(`project/tree/json`)
+}

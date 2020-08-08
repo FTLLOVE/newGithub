@@ -10,7 +10,7 @@ import { styles as globalStyle } from '../../style/globalStyles';
 import NavBar from '../../components/common/NavBar';
 import Banner from '../../components/home/Banner';
 import NavigationUtil from '../../utils/NavigationUtil';
-import { getRealDP as dp, DEVICE_HEIGHT } from '../../utils/ScreenUtil'
+import { getRealDP as dp } from '../../utils/ScreenUtil'
 import ListFooter from '../../components/common/ListFooter'
 import CommonFlatList from '../../components/common/CommonFlatList'
 import ArticleItem from '../../components/common/ArticleItem'
@@ -29,7 +29,7 @@ class HomePage extends PureComponent {
 
 	render() {
 		NavigationUtil.navigation = this.props.navigation;
-		let { articleList } = this.props;
+		let { articleList, isLoading } = this.props;
 		return (
 			<View style={globalStyle.container}>
 				{/* 头部导航 */}
@@ -105,7 +105,7 @@ const mapStateToProps = (state) => {
 		page: state.home.page,
 		isFullData: state.home.isFullData,
 		homeBannerList: state.home.homeBannerList,
-		isRenderFooter: state.home.isRenderFooter
+		isRenderFooter: state.home.isRenderFooter,
 	};
 };
 

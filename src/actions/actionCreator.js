@@ -64,3 +64,10 @@ export function fetchArticleLoading(data) {
 		data
 	}
 }
+
+export function fetchProjectTree(data) {
+	return {
+		type: actionTypes.GET_PROJECT_TREE,
+		data
+	}
+}
