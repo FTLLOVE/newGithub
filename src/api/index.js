@@ -31,3 +31,11 @@ export function getProjectTree() {
 export function getGuideTree() {
 	return httpUtil.get(`navi/json`)
 }
+
+export function hotkeyJson() {
+	return httpUtil.get("hotkey/json")
+}
+
+export function articleQuery(k, page = 0) {
+	return httpUtil.post(`article/query/${page}/json`, { k })
+}

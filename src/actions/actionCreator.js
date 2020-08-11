@@ -85,3 +85,10 @@ export function updateSelectIndex(data) {
 		data
 	}
 }
+
+export function getHotKeyJson(data) {
+	return {
+		type: actionTypes.GET_HOT_KEY,
+		data
+	}
+}

@@ -20,10 +20,6 @@ export default class WebviewPage extends PureComponent {
 			<View style={globalStyle.container}>
 				<NavBar
 					title={title}
-					rightIcon={'ios-share-social'}
-					rightPress={() => {
-						alert("分享")
-					}}
 				/>
 				<ProgressBar progress={this.state.progress} />
 				<WebView

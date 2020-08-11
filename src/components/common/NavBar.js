@@ -52,7 +52,7 @@ class NavBar extends PureComponent {
 				{/* right */}
 				{
 					rightIcon ? (
-						<TouchableOpacity onPress={rightPress}>
+						<TouchableOpacity onPress={rightPress} activeOpacity={0.8}>
 							<View style={[styles.iconWrapper]}>
 								<Icon name={rightIcon} size={dp(40)} color={Color.WhiteColor} />
 							</View>
@@ -61,7 +61,6 @@ class NavBar extends PureComponent {
 							<View style={styles.iconWrapper} />
 						)
 				}
-				<View style={styles.iconWrapper} />
 			</View>
 		)
 	}

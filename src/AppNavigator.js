@@ -14,6 +14,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import WebviewPage from './pages/webview/WebviewPage';
 import SystemChildPage from './pages/system/SystemChildPage'
+import SearchPage from './pages/search/SearchPage'
+import SearchArticlePage from './pages/search/SearchArticlePage'
 
 const tabNavigator = createBottomTabNavigator(
 	{
@@ -41,7 +43,9 @@ const tabNavigator = createBottomTabNavigator(
 const rootStack = createStackNavigator({
 	Home: tabNavigator,
 	WebviewPage: WebviewPage,
-	SystemChildPage: SystemChildPage
+	SystemChildPage: SystemChildPage,
+	SearchPage: SearchPage,
+	SearchArticlePage: SearchArticlePage
 }, {
 	initialRouteName: 'Home',
 	mode: 'fade',

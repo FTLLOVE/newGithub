@@ -14,6 +14,7 @@ import { getRealDP as dp } from '../../utils/ScreenUtil'
 import ListFooter from '../../components/common/ListFooter'
 import CommonFlatList from '../../components/common/CommonFlatList'
 import ArticleItem from '../../components/common/ArticleItem'
+import { showToast } from '../../utils/Utility'
 
 class HomePage extends PureComponent {
 
@@ -29,11 +30,13 @@ class HomePage extends PureComponent {
 
 	render() {
 		NavigationUtil.navigation = this.props.navigation;
-		let { articleList, isLoading } = this.props;
+		let { articleList } = this.props;
 		return (
 			<View style={globalStyle.container}>
 				{/* 头部导航 */}
-				<NavBar title={'WanAndroid'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} />
+				<NavBar title={'WanAndroid'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} rightPress={() => {
+					NavigationUtil.goPage("SearchPage")
+				}} />
 				<CommonFlatList
 					data={articleList}
 					keyExtractor={(item) => item.id.toString()}

@@ -156,3 +156,31 @@ export async function fetchUpdateSelectIndex(data) {
 	const action = actionCreator.updateSelectIndex(data)
 	store.dispatch(action)
 }
+
+/**
+ * 获取搜索热词
+ */
+export function fetchHotKeyJson() {
+	return new Promise(async (resolve, reject) => {
+		await API.hotkeyJson().then(res => {
+			resolve(res.data)
+		}).catch(err => {
+			reject(err)
+		})
+	})
+}
+
+/**
+ * 搜索文章列表
+ * @param {页码} page 
+ * @param {关键字} k 
+ */
+export function fetchSearchArticleList(k, page = 0) {
+	return new Promise(async (resolve, reject) => {
+		await API.articleQuery(k, page).then(res => {
+			resolve(res.data)
+		}).catch(err => {
+			reject(err)
+		})
+	})
+}
