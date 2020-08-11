@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { View, Text } from 'react-native'
 import NavBar from '../../components/common/NavBar'
 import { styles as globalStyles } from '../../style/globalStyles'
 import { fetchSystemList } from '../../actions'
@@ -31,7 +31,6 @@ class SystemPage extends PureComponent {
 			this.setState({
 				dataSource: res,
 			})
-			console.log(res)
 		}).catch(err => { })
 	}
 

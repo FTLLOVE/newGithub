@@ -71,3 +71,17 @@ export function fetchProjectTree(data) {
 		data
 	}
 }
+
+export function fetchGuideTree(data) {
+	return {
+		type: actionTypes.GET_GUIDE_TREE,
+		data
+	}
+}
+
+export function updateSelectIndex(data) {
+	return {
+		type: actionTypes.UPDATE_SELECT_INDEX,
+		data
+	}
+}

@@ -27,3 +27,7 @@ export function getWxArticleListOfAuthor(page = 0, authorId) {
 export function getProjectTree() {
 	return httpUtil.get(`project/tree/json`)
 }
+
+export function getGuideTree() {
+	return httpUtil.get(`navi/json`)
+}

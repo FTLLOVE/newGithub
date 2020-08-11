@@ -133,3 +133,26 @@ export async function fetchProjectTree() {
 			store.dispatch(actionCreator.handleFailure());
 		});
 }
+
+/**
+ * 获取导航列表
+ */
+export async function fetchGuideTree() {
+	await API.getGuideTree()
+		.then(res => {
+			const action = actionCreator.fetchGuideTree(res.data)
+			store.dispatch(action)
+		})
+		.catch(err => {
+			store.dispatch(actionCreator.handleFailure())
+		})
+}
+
+/**
+ * 更新索引
+ * @param {*} data 
+ */
+export async function fetchUpdateSelectIndex(data) {
+	const action = actionCreator.updateSelectIndex(data)
+	store.dispatch(action)
+}
