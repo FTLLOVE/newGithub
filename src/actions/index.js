@@ -11,6 +11,7 @@ import * as API from '../api';
 export async function fetchArticleList() {
 	await API.getArticleList()
 		.then(res => {
+			fetchArticleLoading(false)
 			const action = actionCreator.getArticleList(res.data);
 			store.dispatch(action);
 		})
@@ -126,6 +127,7 @@ export function fetchArticleLoading(isLoading) {
 export async function fetchProjectTree() {
 	await API.getProjectTree()
 		.then(res => {
+			fetchArticleLoading(false)
 			const action = actionCreator.fetchProjectTree(res.data);
 			store.dispatch(action);
 		})

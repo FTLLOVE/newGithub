@@ -13,7 +13,6 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/masked-view": "^0.1.10",
-    "@react-native-community/viewpager": "^4.1.4",
     "animated-lazy-image": "^1.0.1",
     "axios": "^0.19.2",
     "prop-types": "^15.7.2",
@@ -28,7 +27,7 @@
     "react-native-safe-area-context": "^3.1.1",
     "react-native-screens": "^2.9.0",
     "react-native-splash-screen": "^3.2.0",
-    "react-native-swiper": "^1.6.0",
+    "react-native-swiper": "1.6.0-nightly.5",
     "react-native-vector-icons": "^7.0.0",
     "react-native-webview": "^10.3.2",
     "react-navigation": "4.0",

@@ -7,6 +7,8 @@ import { fetchGuideTree, fetchUpdateSelectIndex } from '../../actions'
 import { connect } from 'react-redux'
 import Color from '../../Color'
 import NavigationUtil from '../../utils/NavigationUtil'
+import LoadingView from '../../components/common/LoadingView'
+import guide from '../../reducer/guide'
 
 class GuidePage extends PureComponent {
 
@@ -110,35 +112,43 @@ class GuidePage extends PureComponent {
 		}
 		return (
 			<View style={globalStyle.container}>
-				<NavBar title={'导航'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} />
-				<View style={{ flex: 1, flexDirection: 'row' }}>
-					<View style={styles.leftContent}>
-						<FlatList
-							ref={comp => {
-								this.leftFlatListRef = comp
-							}}
-							style={{ backgroundColor: '#f8f8f8' }}
-							data={guideData}
-							keyExtractor={item => item.cid.toString()}
-							renderItem={this.renderLeftItem}
-							showsVerticalScrollIndicator={false}
-						/>
-					</View>
-					<View style={styles.rightContent}>
-						<FlatList
-							ref={comp => {
-								this.rightFlatListRef = comp
-							}}
-							data={guideData}
-							keyExtractor={(item, index) => index.toString()}
-							ListHeaderComponent={() => <View style={{ height: dp(20) }} />}
-							renderItem={this.renderRightItem}
-							showsVerticalScrollIndicator={false}
-							viewabilityConfig={VIEWABILITY_CONFIG}
-							onViewableItemsChanged={this.onViewableItemsChanged}
-						/>
-					</View>
-				</View>
+				<NavBar title={'导航'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} rightPress={() => {
+					NavigationUtil.goPage("SearchPage")
+				}} />
+				{
+					guideData.length === 0 ? (
+						<LoadingView isLoading={true} />
+					) : (
+							<View style={{ flex: 1, flexDirection: 'row' }}>
+								<View style={styles.leftContent}>
+									<FlatList
+										ref={comp => {
+											this.leftFlatListRef = comp
+										}}
+										style={{ backgroundColor: '#f8f8f8' }}
+										data={guideData}
+										keyExtractor={item => item.cid.toString()}
+										renderItem={this.renderLeftItem}
+										showsVerticalScrollIndicator={false}
+									/>
+								</View>
+								<View style={styles.rightContent}>
+									<FlatList
+										ref={comp => {
+											this.rightFlatListRef = comp
+										}}
+										data={guideData}
+										keyExtractor={(item, index) => index.toString()}
+										ListHeaderComponent={() => <View style={{ height: dp(20) }} />}
+										renderItem={this.renderRightItem}
+										showsVerticalScrollIndicator={false}
+										viewabilityConfig={VIEWABILITY_CONFIG}
+										onViewableItemsChanged={this.onViewableItemsChanged}
+									/>
+								</View>
+							</View>
+						)
+				}
 			</View>
 		);
 	}

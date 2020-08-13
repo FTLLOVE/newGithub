@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import { fetchWxArticleList, fetchArticleLoading } from '../../actions/index'
 import ArticleTabComponent from '../../components/common/ArticleTabComponent'
 import LoadingView from '../../components/common/LoadingView'
-
+import NavigationUtil from '../../utils/NavigationUtil'
 /**
  * 公众号
  */
@@ -21,7 +21,9 @@ class WxArticlePage extends Component {
 		let { articleTabs, isLoading } = this.props
 		return (
 			<View style={globalStyles.container}>
-				<NavBar title={'公众号'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} />
+				<NavBar title={'公众号'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} rightPress={() => {
+					NavigationUtil.goPage("SearchPage")
+				}} />
 				<ArticleTabComponent articleTabs={articleTabs} />
 				<LoadingView isLoading={isLoading} />
 			</View>

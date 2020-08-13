@@ -1,7 +1,8 @@
 import actionTypes from '../actions/actionTypes'
 
 const defaultState = {
-	projectTabs: []
+	projectTabs: [],
+	isLoading: false
 }
 
 export default (state = defaultState, action) => {
@@ -10,6 +11,11 @@ export default (state = defaultState, action) => {
 			return {
 				...state,
 				projectTabs: action.data
+			}
+		case actionTypes.ARTICLE_LOADING:
+			return {
+				...state,
+				isLoading: action.data
 			}
 		default:
 			return state

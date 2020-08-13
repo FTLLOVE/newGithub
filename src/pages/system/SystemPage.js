@@ -9,6 +9,7 @@ import { getRealDP as dp } from '../../utils/ScreenUtil'
 import { connect } from 'react-redux'
 import LoadingView from '../../components/common/LoadingView'
 import { fetchArticleLoading } from '../../actions'
+import NavigationUtil from '../../utils/NavigationUtil'
 /**
  * 系统
  */
@@ -27,10 +28,10 @@ class SystemPage extends PureComponent {
 	componentDidMount() {
 		fetchArticleLoading(true)
 		fetchSystemList().then(res => {
-			fetchArticleLoading(false)
 			this.setState({
 				dataSource: res,
 			})
+			fetchArticleLoading(false)
 		}).catch(err => { })
 	}
 
@@ -51,7 +52,9 @@ class SystemPage extends PureComponent {
 		let { dataSource, isRefreshing } = this.state
 		return (
 			<View style={globalStyles.container}>
-				<NavBar title={'系统'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} />
+				<NavBar title={'系统'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} rightPress={() => {
+					NavigationUtil.goPage("SearchPage")
+				}} />
 				<CommonFlatList
 					data={dataSource}
 					keyExtractor={(item) => item.id.toString()}

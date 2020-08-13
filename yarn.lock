@@ -1130,11 +1130,6 @@
   resolved "https://registry.npm.taobao.org/@react-native-community/masked-view/download/@react-native-community/masked-view-0.1.10.tgz#5dda643e19e587793bc2034dd9bf7398ad43d401"
   integrity sha1-XdpkPhnlh3k7wgNN2b9zmK1D1AE=
 
-"@react-native-community/viewpager@^4.1.4":
-  version "4.1.4"
-  resolved "https://registry.npm.taobao.org/@react-native-community/viewpager/download/@react-native-community/viewpager-4.1.4.tgz#055ff1636ea2362c991e795959da1f68a377c732"
-  integrity sha1-BV/xY26iNiyZHnlZWdofaKN3xzI=
-
 "@react-navigation/core@^3.5.1":
   version "3.7.6"
   resolved "https://registry.npm.taobao.org/@react-navigation/core/download/@react-navigation/core-3.7.6.tgz#e0244fcdc22937825b252197f70308bbe5709c58"
@@ -5906,10 +5901,10 @@ react-native-splash-screen@^3.2.0:
   resolved "https://registry.npm.taobao.org/react-native-splash-screen/download/react-native-splash-screen-3.2.0.tgz#d47ec8557b1ba988ee3ea98d01463081b60fff45"
   integrity sha1-1H7IVXsbqYjuPqmNAUYwgbYP/0U=
 
-react-native-swiper@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.npm.taobao.org/react-native-swiper/download/react-native-swiper-1.6.0.tgz#59fdbdf95addee49630312f27077622c27776819"
-  integrity sha1-Wf29+Vrd7kljAxLycHdiLCd3aBk=
+react-native-swiper@1.6.0-nightly.5:
+  version "1.6.0-nightly.5"
+  resolved "https://registry.npm.taobao.org/react-native-swiper/download/react-native-swiper-1.6.0-nightly.5.tgz#894319918ff22680c325b8052457ccf213a7c7cd"
+  integrity sha1-iUMZkY/yJoDDJbgFJFfM8hOnx80=
   dependencies:
     prop-types "^15.5.10"
 

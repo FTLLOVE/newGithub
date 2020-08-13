@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import {
 	fetchArticleList,
 	fetchHomeBannerList,
-	fetchArticleListMore
+	fetchArticleListMore,
+	fetchArticleLoading
 } from '../../actions';
 import { styles as globalStyle } from '../../style/globalStyles';
 import NavBar from '../../components/common/NavBar';
@@ -14,7 +15,7 @@ import { getRealDP as dp } from '../../utils/ScreenUtil'
 import ListFooter from '../../components/common/ListFooter'
 import CommonFlatList from '../../components/common/CommonFlatList'
 import ArticleItem from '../../components/common/ArticleItem'
-import { showToast } from '../../utils/Utility'
+import LoadingView from '../../components/common/LoadingView'
 
 class HomePage extends PureComponent {
 
@@ -47,11 +48,13 @@ class HomePage extends PureComponent {
 					isRefreshing={this.state.refreshing}
 					toRefresh={this.onRefresh}
 				/>
+				<LoadingView isLoading={this.props.isLoading} />
 			</View>
 		);
 	}
 
 	componentDidMount() {
+		fetchArticleLoading(true)
 		this.fetchData();
 	}
 
@@ -109,6 +112,7 @@ const mapStateToProps = (state) => {
 		isFullData: state.home.isFullData,
 		homeBannerList: state.home.homeBannerList,
 		isRenderFooter: state.home.isRenderFooter,
+		isLoading: state.home.isLoading
 	};
 };
 
