@@ -2,9 +2,10 @@ import React, { PureComponent } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Image } from 'react-native'
 import Color from '../../Color';
 import { styles as globalStyles } from '../../style/globalStyles'
-import { getRealDP as dp, DEVICE_WIDTH } from '../../utils/ScreenUtil'
+import { getRealDP as dp } from '../../utils/ScreenUtil'
 import NavigationUtil from '../../utils/NavigationUtil';
 import Icon from 'react-native-vector-icons/Ionicons';
+import LazyImage from 'animated-lazy-image'
 /**
  * 文章item
  */
@@ -52,10 +53,9 @@ class ArticleItem extends PureComponent {
 					<View style={styles.itemRightWrapper}>
 						{
 							item.envelopePic ? (
-								<Image
+								<LazyImage
 									style={styles.image}
-									source={{ uri: item.envelopePic }}
-									resizeMode={'stretch'}
+									source={item.envelopePic}
 								/>
 							) : (
 									<View style={{ backgroundColor: Color.WhiteColor }}>

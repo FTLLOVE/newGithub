@@ -11,7 +11,6 @@ import * as API from '../api';
 export async function fetchArticleList() {
 	await API.getArticleList()
 		.then(res => {
-			fetchArticleLoading(false)
 			const action = actionCreator.getArticleList(res.data);
 			store.dispatch(action);
 		})
@@ -55,16 +54,12 @@ export async function fetchHomeBannerList() {
 /**
  * 获取系统列表
  */
-export function fetchSystemList() {
-	return new Promise(async (resolve, reject) => {
-		await API.getSystemList()
-			.then(res => {
-				resolve(res.data)
-			})
-			.catch(err => {
-				reject(err)
-			})
-	})
+export async function fetchSystemList() {
+	await API.getSystemList()
+		.then(res => {
+			const action = actionCreator.getSystemList(res.data)
+			store.dispatch(action)
+		})
 }
 
 /**
@@ -127,7 +122,6 @@ export function fetchArticleLoading(isLoading) {
 export async function fetchProjectTree() {
 	await API.getProjectTree()
 		.then(res => {
-			fetchArticleLoading(false)
 			const action = actionCreator.fetchProjectTree(res.data);
 			store.dispatch(action);
 		})

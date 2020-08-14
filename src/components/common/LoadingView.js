@@ -15,7 +15,7 @@ class LoadingView extends Component {
 				<View style={styles.loadingWrapper}>
 					<View style={styles.loadingContent}>
 						<ActivityIndicator size={'large'} color={Color.WhiteColor} />
-						<Text style={styles.loadingText}>加载中</Text>
+						<Text style={styles.loadingText}>加载中...</Text>
 					</View>
 				</View>
 			</View>

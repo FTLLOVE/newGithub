@@ -2,13 +2,12 @@ import React, { PureComponent } from 'react'
 import { View, Text } from 'react-native'
 import NavBar from '../../components/common/NavBar'
 import { styles as globalStyles } from '../../style/globalStyles'
-import { fetchSystemList } from '../../actions'
 import CommonFlatList from '../../components/common/CommonFlatList'
 import SystemArticleItem from '../../components/system/SystemArticleItem'
 import { getRealDP as dp } from '../../utils/ScreenUtil'
 import { connect } from 'react-redux'
 import LoadingView from '../../components/common/LoadingView'
-import { fetchArticleLoading } from '../../actions'
+import { fetchArticleLoading, fetchSystemList } from '../../actions'
 import NavigationUtil from '../../utils/NavigationUtil'
 /**
  * 系统
@@ -18,7 +17,6 @@ class SystemPage extends PureComponent {
 	constructor(props) {
 		super(props)
 		this.state = {
-			dataSource: [],
 			isRefreshing: false,
 			toRefresh: []
 		}
@@ -26,44 +24,35 @@ class SystemPage extends PureComponent {
 	}
 
 	componentDidMount() {
-		fetchArticleLoading(true)
-		fetchSystemList().then(res => {
-			this.setState({
-				dataSource: res,
-			})
-			fetchArticleLoading(false)
-		}).catch(err => { })
+		// fetchArticleLoading(true)
+		fetchSystemList()
 	}
 
 	toRefresh() {
 		this.setState({ isRefreshing: true });
 		setTimeout(() => {
-			fetchSystemList().then(res => {
-				this.setState({
-					dataSource: res,
-					isRefreshing: false
-				})
+			fetchSystemList()
+			this.setState({
+				isRefreshing: false
 			})
 		}, 1000);
 	}
 
-
 	render() {
-		let { dataSource, isRefreshing } = this.state
 		return (
 			<View style={globalStyles.container}>
 				<NavBar title={'系统'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} rightPress={() => {
 					NavigationUtil.goPage("SearchPage")
 				}} />
 				<CommonFlatList
-					data={dataSource}
+					data={this.props.dataSource}
 					keyExtractor={(item) => item.id.toString()}
 					renderItem={({ item }) => <SystemArticleItem item={item} />}
-					isRefreshing={isRefreshing}
+					isRefreshing={this.state.isRefreshing}
 					toRefresh={this.toRefresh}
 					ListHeaderComponent={() => <View style={{ height: dp(20) }} />}
 				/>
-				<LoadingView isLoading={this.props.isLoading} />
+				{/* <LoadingView isLoading={this.props.isLoading} /> */}
 			</View>
 		)
 	}
@@ -72,7 +61,8 @@ class SystemPage extends PureComponent {
 
 const mapStateToProps = (state) => {
 	return {
-		isLoading: state.wxArticle.isLoading
+		// isLoading: state.system.isLoading,
+		dataSource: state.system.dataSource
 	}
 }
 

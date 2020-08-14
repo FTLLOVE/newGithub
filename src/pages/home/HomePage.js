@@ -31,11 +31,11 @@ class HomePage extends PureComponent {
 
 	render() {
 		NavigationUtil.navigation = this.props.navigation;
-		let { articleList } = this.props;
+		let { articleList, isLoading } = this.props;
 		return (
 			<View style={globalStyle.container}>
 				{/* 头部导航 */}
-				<NavBar title={'WanAndroid'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} rightPress={() => {
+				<NavBar title={'WanAndroid'} rightIcon={'ios-search-outline'} leftIcon={'222323'} rightPress={() => {
 					NavigationUtil.goPage("SearchPage")
 				}} />
 				<CommonFlatList
@@ -48,7 +48,8 @@ class HomePage extends PureComponent {
 					isRefreshing={this.state.refreshing}
 					toRefresh={this.onRefresh}
 				/>
-				<LoadingView isLoading={this.props.isLoading} />
+
+
 			</View>
 		);
 	}

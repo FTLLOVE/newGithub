@@ -8,6 +8,7 @@ import Swiper from 'react-native-swiper'
 import Color from '../../Color'
 import PropTypes from 'prop-types'
 import NavigationUtil from '../../utils/NavigationUtil'
+import LazyImage from 'animated-lazy-image'
 
 
 class Banner extends PureComponent {
@@ -53,7 +54,7 @@ class Banner extends PureComponent {
 					{bannerArr.map(el => {
 						return (
 							<TouchableOpacity key={el.id} activeOpacity={1} onPress={() => this.handlePress(el)} >
-								<Image style={styles.imgBanner} source={{ uri: el.imagePath }} />
+								<LazyImage source={el.imagePath} style={styles.imgBanner} />
 							</TouchableOpacity>
 						)
 					})}

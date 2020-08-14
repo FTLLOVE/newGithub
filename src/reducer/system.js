@@ -1,23 +1,20 @@
 import actionTypes from '../actions/actionTypes'
+
 const defaultState = {
-	guideData: [],
-	selectIndex: 0,
-	isLoading: false
+	isLoading: false,
+	dataSource: [],
 }
 
 export default (state = defaultState, action) => {
 	switch (action.type) {
-		case actionTypes.GET_GUIDE_TREE:
+		case actionTypes.GET_SYSTEM_LIST:
 			return {
 				...state,
-				guideData: action.data
-			}
-		case actionTypes.UPDATE_SELECT_INDEX:
-			return {
-				...state,
-				selectIndex: action.data
+				isLoading: false,
+				dataSource: action.data
 			}
 		case actionTypes.ARTICLE_LOADING:
+			debugger
 			return {
 				...state,
 				isLoading: action.data
@@ -26,3 +23,4 @@ export default (state = defaultState, action) => {
 			return state;
 	}
 }
+

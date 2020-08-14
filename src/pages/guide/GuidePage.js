@@ -1,14 +1,13 @@
 import React, { PureComponent } from 'react'
-import { Text, View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, FlatList, TouchableOpacity, Touchable } from 'react-native'
 import NavBar from '../../components/common/NavBar'
 import { styles as globalStyle } from '../../style/globalStyles'
 import { getRealDP as dp } from '../../utils/ScreenUtil'
-import { fetchGuideTree, fetchUpdateSelectIndex } from '../../actions'
+import { fetchGuideTree, fetchUpdateSelectIndex, fetchArticleLoading } from '../../actions'
 import { connect } from 'react-redux'
 import Color from '../../Color'
 import NavigationUtil from '../../utils/NavigationUtil'
 import LoadingView from '../../components/common/LoadingView'
-import guide from '../../reducer/guide'
 
 class GuidePage extends PureComponent {
 
@@ -68,35 +67,39 @@ class GuidePage extends PureComponent {
 		return (
 			<TouchableOpacity
 				activeOpacity={1}
-				style={[styles.leftWrapper, { backgroundColor: selectIndex === index ? Color.WhiteColor : '#f8f8f8' }]}
+				style={selectIndex === index ? styles.leftBtnChecked : styles.leftBtnUnChecked}
 				onPress={() => this.handleLeftItemPress(index)}
 			>
-				<Text style={{ fontSize: dp(26), color: selectIndex === index ? Color.PrimaryColor : Color.TEXTMAINCOLOR }}>{item.name}</Text>
+				<Text
+					style={selectIndex === index ? styles.leftTextChecked : styles.leftTextUnChecked}
+				>
+					{item.name}
+				</Text>
 			</TouchableOpacity>
 		)
 	}
 
-	renderRightItem({ item, index }) {
+	renderRightItem({ item }) {
 		return (
 			<View style={styles.rightWrapper}>
 				<View style={styles.itemContent}>
 					<Text style={styles.title}>{item.name}</Text>
 					<View style={styles.content}>
-						{
-							item.articles.map((item, index) => (
-								<View key={item.id} style={styles.tabItemWrapper}>
-									<TouchableOpacity activeOpacity={1} onPress={() => {
+						{item.articles.map(el => (
+							<View key={el.id} style={{ backgroundColor: Color.WHITE }}>
+								<TouchableOpacity
+									activeOpacity={1}
+									style={styles.tabItemWrapper}
+									onPress={() => {
 										NavigationUtil.goPage("WebviewPage", {
-											"link": item.link,
-											"title": item.title
+											title: el.title,
+											link: el.link
 										})
 									}}>
-										<Text style={styles.tabItemText}>{item.title}</Text>
-									</TouchableOpacity>
-								</View>
-							))
-						}
-
+									<Text style={styles.tabItemText}>{el.title}</Text>
+								</TouchableOpacity>
+							</View>
+						))}
 					</View>
 				</View>
 			</View>
@@ -115,40 +118,34 @@ class GuidePage extends PureComponent {
 				<NavBar title={'导航'} rightIcon={'ios-search-outline'} leftIcon={'ios-person-circle-outline'} rightPress={() => {
 					NavigationUtil.goPage("SearchPage")
 				}} />
-				{
-					guideData.length === 0 ? (
-						<LoadingView isLoading={true} />
-					) : (
-							<View style={{ flex: 1, flexDirection: 'row' }}>
-								<View style={styles.leftContent}>
-									<FlatList
-										ref={comp => {
-											this.leftFlatListRef = comp
-										}}
-										style={{ backgroundColor: '#f8f8f8' }}
-										data={guideData}
-										keyExtractor={item => item.cid.toString()}
-										renderItem={this.renderLeftItem}
-										showsVerticalScrollIndicator={false}
-									/>
-								</View>
-								<View style={styles.rightContent}>
-									<FlatList
-										ref={comp => {
-											this.rightFlatListRef = comp
-										}}
-										data={guideData}
-										keyExtractor={(item, index) => index.toString()}
-										ListHeaderComponent={() => <View style={{ height: dp(20) }} />}
-										renderItem={this.renderRightItem}
-										showsVerticalScrollIndicator={false}
-										viewabilityConfig={VIEWABILITY_CONFIG}
-										onViewableItemsChanged={this.onViewableItemsChanged}
-									/>
-								</View>
-							</View>
-						)
-				}
+				<View style={{ flex: 1, flexDirection: 'row' }}>
+					<View style={styles.leftContent}>
+						<FlatList
+							ref={comp => {
+								this.leftFlatListRef = comp
+							}}
+							style={{ backgroundColor: '#f8f8f8' }}
+							data={guideData}
+							keyExtractor={(item, index) => index.toString()}
+							renderItem={this.renderLeftItem}
+							showsVerticalScrollIndicator={false}
+						/>
+					</View>
+					<View style={styles.rightContent}>
+						<FlatList
+							ref={comp => {
+								this.rightFlatListRef = comp
+							}}
+							data={guideData}
+							keyExtractor={(item, index) => index.toString()}
+							ListHeaderComponent={() => <View style={{ height: dp(20) }} />}
+							renderItem={this.renderRightItem}
+							showsVerticalScrollIndicator={false}
+							viewabilityConfig={VIEWABILITY_CONFIG}
+							onViewableItemsChanged={this.onViewableItemsChanged}
+						/>
+					</View>
+				</View>
 			</View>
 		);
 	}
@@ -162,11 +159,19 @@ const styles = StyleSheet.create({
 		flex: 1,
 		width: dp(500)
 	},
-	leftWrapper: {
-		height: dp(90),
+	leftBtnChecked: {
+		height: dp(100),
 		width: dp(200),
 		justifyContent: 'center',
 		alignItems: 'center',
+		backgroundColor: Color.WhiteColor
+	},
+	leftBtnUnChecked: {
+		height: dp(100),
+		width: dp(200),
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#f8f8f8'
 	},
 	rightWrapper: {
 		flex: 1,
@@ -206,13 +211,21 @@ const styles = StyleSheet.create({
 	tabItemText: {
 		fontSize: dp(26),
 		color: Color.WhiteColor
+	},
+	leftTextChecked: {
+		fontSize: dp(26),
+		color: Color.PrimaryColor
+	},
+	leftTextUnChecked: {
+		fontSize: dp(26),
+		color: Color.TEXTMAINCOLOR
 	}
 });
 
 const mapStateToProps = (state) => {
 	return {
 		guideData: state.guide.guideData,
-		selectIndex: state.guide.selectIndex
+		selectIndex: state.guide.selectIndex,
 	}
 }
 export default connect(mapStateToProps, null)(GuidePage);
