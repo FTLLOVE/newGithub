@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet } from 'react-native'
 import Color from '../../Color'
 import { getRealDP as dp } from '../../utils/ScreenUtil'
 import { createMaterialTopTabNavigator } from 'react-navigation-tabs'

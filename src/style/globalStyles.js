@@ -3,7 +3,7 @@
  */
 import { StyleSheet } from 'react-native'
 import Color from '../Color'
-import { DEVICE_WIDTH, getRealDP as dp } from '../utils/ScreenUtil'
+import { getRealDP as dp } from '../utils/ScreenUtil'
 
 const styles = StyleSheet.create({
 	container: {

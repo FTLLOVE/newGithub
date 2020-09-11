@@ -6,7 +6,6 @@ const defaultState = {
 	page: 0, // 页码
 	isFullData: false, // 是否加载全部数据
 	isRenderFooter: false, // 是否渲染底部组件
-	isLoading: false
 }
 
 export default (state = defaultState, action) => {
@@ -32,11 +31,6 @@ export default (state = defaultState, action) => {
 				articleList: newArticleList,
 				isFullData: action.data.datas.length === 0,
 				isRenderFooter: !!action.data.total, // 只有total=0的时候不渲染底部
-			}
-		case actionTypes.ARTICLE_LOADING:
-			return {
-				...state,
-				isLoading: action.data
 			}
 		case actionTypes.HANDLE_FAILURE:
 			return state

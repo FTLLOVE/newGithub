@@ -86,19 +86,18 @@ class GuidePage extends PureComponent {
 					<Text style={styles.title}>{item.name}</Text>
 					<View style={styles.content}>
 						{item.articles.map(el => (
-							<View key={el.id} style={{ backgroundColor: Color.WHITE }}>
-								<TouchableOpacity
-									activeOpacity={1}
-									style={styles.tabItemWrapper}
-									onPress={() => {
-										NavigationUtil.goPage("WebviewPage", {
-											title: el.title,
-											link: el.link
-										})
-									}}>
-									<Text style={styles.tabItemText}>{el.title}</Text>
-								</TouchableOpacity>
-							</View>
+							<TouchableOpacity activeOpacity={1} onPress={() => {
+								NavigationUtil.goPage("WebviewPage", {
+									title: el.title,
+									link: el.link
+								})
+							}}>
+								<View style={{
+									marginLeft: dp(10), backgroundColor: Color.PrimaryColor, marginBottom: dp(20), paddingHorizontal: dp(10), paddingVertical: dp(10), borderRadius: dp(40)
+								}}>
+									<Text key={el.id}>{el.title}</Text>
+								</View>
+							</TouchableOpacity>
 						))}
 					</View>
 				</View>

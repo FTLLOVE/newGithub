@@ -1,9 +1,8 @@
 import React from 'react'
-import { StyleSheet, View, FlatList, RefreshControl, TouchableOpacity, Image } from 'react-native'
+import { StyleSheet, View, FlatList, RefreshControl, } from 'react-native'
 import { connect } from 'react-redux'
 import { getRealDP as dp, DEVICE_HEIGHT } from '../../utils/ScreenUtil'
 import Color from '../../Color'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 /**
  * 公共FlatList

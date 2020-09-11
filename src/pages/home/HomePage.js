@@ -15,7 +15,6 @@ import { getRealDP as dp } from '../../utils/ScreenUtil'
 import ListFooter from '../../components/common/ListFooter'
 import CommonFlatList from '../../components/common/CommonFlatList'
 import ArticleItem from '../../components/common/ArticleItem'
-import LoadingView from '../../components/common/LoadingView'
 
 class HomePage extends PureComponent {
 
@@ -31,7 +30,7 @@ class HomePage extends PureComponent {
 
 	render() {
 		NavigationUtil.navigation = this.props.navigation;
-		let { articleList, isLoading } = this.props;
+		let { articleList } = this.props;
 		return (
 			<View style={globalStyle.container}>
 				{/* 头部导航 */}
@@ -55,7 +54,6 @@ class HomePage extends PureComponent {
 	}
 
 	componentDidMount() {
-		fetchArticleLoading(true)
 		this.fetchData();
 	}
 
@@ -113,7 +111,6 @@ const mapStateToProps = (state) => {
 		isFullData: state.home.isFullData,
 		homeBannerList: state.home.homeBannerList,
 		isRenderFooter: state.home.isRenderFooter,
-		isLoading: state.home.isLoading
 	};
 };
 
