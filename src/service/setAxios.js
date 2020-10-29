@@ -8,10 +8,6 @@ const headers = {
 	'Content-Type': 'multipart/form-data;charset=utf-8'
 }
 
-function handleResponseLog(data) {
-	//TODO 响应日志
-	// console.warn("log: ", data)
-}
 
 export function setAxios() {
 	axios.defaults.headers = headers
@@ -21,7 +17,7 @@ export function setAxios() {
 	axios.interceptors.request.use(
 
 		async config => {
-			if (config.method == 'post') {
+			if (config.method === 'post') {
 				let data = new FormData()
 				for (let i in config.data) {
 					data.append(i, config.data[i])
@@ -38,7 +34,6 @@ export function setAxios() {
 
 	axios.interceptors.response.use(
 		response => {
-			handleResponseLog(response.data)
 			if (response.data.errorCode === 0) {
 				return Promise.resolve(response.data)
 			} else {

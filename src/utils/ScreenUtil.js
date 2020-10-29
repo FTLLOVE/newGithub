@@ -9,7 +9,7 @@ export const isAndroid = Platform.OS === 'android';
  * @param designPx 设计稿标注的像素值
  * @returns {number}
  */
-export function getRealDP(designPx) {
+export function dp(designPx) {
 	return PixelRatio.roundToNearestPixel((designPx / 750) * DEVICE_WIDTH);
 }
 

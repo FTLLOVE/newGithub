@@ -1,3 +1,6 @@
+/**
+ *
+ */
 import React, { PureComponent } from 'react'
 import {
 	StyleSheet,
@@ -6,7 +9,7 @@ import {
 	View
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import { DEVICE_WIDTH, getRealDP as dp, getStatusBarHeight, isAndroid } from '../../utils/ScreenUtil'
+import { DEVICE_WIDTH, dp, getStatusBarHeight, isAndroid } from '../../utils/ScreenUtil'
 import Color from '../../Color'
 import NavigationUtil from '../../utils/NavigationUtil'
 
@@ -22,7 +25,7 @@ class NavBar extends PureComponent {
 	render() {
 		const { leftIcon, rightIcon, titleView, title, rightPress } = this.props
 		return (
-			<View style={[styles.container, { backgroundColor: Color.PrimaryColor }]}>
+			<View style={[styles.container, { backgroundColor: Color.primaryColor }]}>
 				{/* left */}
 				<TouchableOpacity onPress={this.handleLeftPress}>
 					<View style={styles.iconWrapper}>
@@ -31,7 +34,7 @@ class NavBar extends PureComponent {
 								<View />
 							) : (
 									<Icon
-										name={isAndroid ? 'arrow-back' : 'chevron-back-outline'} size={dp(56)} color={Color.WhiteColor}
+										name={isAndroid ? 'arrow-back' : 'chevron-back-outline'} size={dp(56)} color={Color.whiteColor}
 									/>
 								)
 						}
@@ -54,7 +57,7 @@ class NavBar extends PureComponent {
 					rightIcon ? (
 						<TouchableOpacity onPress={rightPress} activeOpacity={0.8}>
 							<View style={[styles.iconWrapper]}>
-								<Icon name={rightIcon} size={dp(40)} color={Color.WhiteColor} />
+								<Icon name={rightIcon} size={dp(40)} color={Color.whiteColor} />
 							</View>
 						</TouchableOpacity>
 					) : (
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
 
 	title: {
 		fontWeight: 'bold',
-		fontSize: dp(35),
-		color: Color.WhiteColor
+		fontSize: dp(38),
+		color: Color.whiteColor
 	}
 })

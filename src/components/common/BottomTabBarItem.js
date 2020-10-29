@@ -3,9 +3,9 @@
  */
 import React, { PureComponent } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { DEVICE_WIDTH, getRealDP as dp } from '../../utils/ScreenUtil';
+import { DEVICE_WIDTH, dp } from '../../utils/ScreenUtil';
 import Color from '../../Color';
+import Icon from 'react-native-vector-icons/Ionicons'
 
 class BottomTabBarItem extends PureComponent {
 	render() {
@@ -19,36 +19,32 @@ class BottomTabBarItem extends PureComponent {
 				tabBarIconName = 'ios-home';
 				tabBarIconSize = dp(50);
 				break;
-			case 'SystemPage':
-				tabBarLabel = '系统';
-				tabBarIconName = 'ios-school';
+			case 'CardPage':
+				tabBarLabel = '卡种';
+				tabBarIconName = 'ios-card';
 				tabBarIconSize = dp(50);
 				break;
-			case 'WxArticlePage':
-				tabBarLabel = '公众号';
-				tabBarIconName = 'ios-people';
+			case 'MessagePage':
+				tabBarLabel = '消息';
+				tabBarIconName = 'chatbox-ellipses';
 				tabBarIconSize = dp(50);
 				break;
-			case 'GuidePage':
-				tabBarLabel = '导航';
-				tabBarIconName = 'ios-rocket';
-				tabBarIconSize = dp(45);
+			case 'OrderPage':
+				tabBarLabel = '订单';
+				tabBarIconName = 'md-book';
+				tabBarIconSize = dp(50);
 				break;
 			default:
-				tabBarLabel = '项目';
-				tabBarIconName = 'ios-folder';
-				tabBarIconSize = dp(45);
+				tabBarLabel = '我的';
+				tabBarIconName = 'md-person-circle-sharp';
+				tabBarIconSize = dp(55);
 				break;
 		}
-		const tabBarColor = focused ? Color.PrimaryColor : Color.TEXTLIGNTCOLOR;
+		const tabBarColor = focused ? Color.primaryColor : '#999999';
 		const content = (
 			<View style={styles.tabBarWrapper}>
 				<View style={styles.iconWrapper}>
-					<Icon
-						name={tabBarIconName}
-						size={tabBarIconSize}
-						color={tabBarColor}
-					/>
+					<Icon name={tabBarIconName} size={tabBarIconSize} color={tabBarColor} />
 				</View>
 				<Text style={[styles.tabBarLabel, { color: tabBarColor }]}>
 					{tabBarLabel}

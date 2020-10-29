@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { ProgressBarAndroid, ProgressViewIOS } from 'react-native'
-import { getRealDP as dp, isAndroid } from '../../utils/ScreenUtil'
+import { dp, isAndroid } from '../../utils/ScreenUtil'
 import Color from '../../Color'
 
 /**
@@ -20,17 +20,17 @@ class ProgressBar extends PureComponent {
 		if (isAndroid) {
 			return (
 				<ProgressBarAndroid
-					style={{ height: dp(10), backgroundColor: Color.WhiteColor }}
+					style={{ height: dp(10), backgroundColor: Color.whiteColor }}
 					styleAttr={'Horizontal'}
-					color={Color.PrimaryColor}
+					color={Color.primaryColor}
 					progress={progress}
 				/>
 			)
 		} else {
 			return (
 				<ProgressViewIOS
-					trackTintColor={Color.WhiteColor}
-					progressTintColor={Color.PrimaryColor}
+					trackTintColor={Color.whiteColor}
+					progressTintColor={Color.primaryColor}
 					progress={progress}
 				/>
 			)

@@ -1,10 +1,13 @@
 import React, { PureComponent } from 'react'
 import { View, Text } from 'react-native'
 import { WebView } from 'react-native-webview'
-import { styles as globalStyle } from '../../style/globalStyles'
+import globalStyle from '../../style/globalStyle'
 import NavBar from '../../components/common/NavBar'
 import ProgressBar from '../../components/common/ProgressBar'
 
+/**
+ * WebviewPage
+ */
 export default class WebviewPage extends PureComponent {
 
 

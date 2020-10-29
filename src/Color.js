@@ -1,17 +1,18 @@
 /**
- * 公共颜色
+ * 
  */
 const Color = {
-	PrimaryColor: '#4A8BF6', // APP主色调
-	WhiteColor: '#FFFFFF',
-	BlackColor: '#000000',
-	DivideColor: '#E8E8E8',
-	PAGEBGCOLOR: '#F1F2F3',
-	TEXTLIGNTCOLOR: '#999999',
-	TEXTMAINCOLOR: '#222222',
-	TEXTDARKCOLOR: '#666666',
-	ICONBGCOLOR: '#E0E0E0',
-	TEXTTABCOLOR: '#E6E6FA'
-};
+	primaryColor: '#4a8bf6',
+	pageColor: '#F2F3F7',
+	whiteColor: '#ffffff',
+	blackColor: '#000000',
+	dividerColor: '#eeeeee',
+	mainTextColor: '#434343',
+	subTextColor: '#8C8C8C',
+	tipTextColor: '#9A9AA6',
+	dangerColor: '#FD404C',
+	warnColor: '#E7A23C',
+	successColor: '#67C23A'
+}
 
-export default Color;
+export default Color

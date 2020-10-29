@@ -1,112 +1,75 @@
-/**
- * TODO  首页banner
- */
 import React, { PureComponent } from 'react'
-import { Text, View, Image, StyleSheet, TouchableOpacity, Touchable } from 'react-native'
-import { getRealDP as dp, DEVICE_WIDTH } from '../../utils/ScreenUtil'
-import Swiper from 'react-native-swiper'
-import Color from '../../Color'
-import PropTypes from 'prop-types'
-import NavigationUtil from '../../utils/NavigationUtil'
+import { StyleSheet, View, Image, TouchableOpacity } from 'react-native'
+import { dp, DEVICE_WIDTH, DEVICE_HEIGHT } from '../../utils/ScreenUtil'
 import LazyImage from 'animated-lazy-image'
+import Color from '../../Color'
+import Carousel from 'react-native-snap-carousel'
 
-
-class Banner extends PureComponent {
+/**
+ * Banner
+ */
+export default class Banner extends PureComponent {
 
 	constructor(props) {
 		super(props)
 		this.state = {
-			currentBannerIndex: 0
+			bannerList: [
+				"http://qn.qihuishou.club/banner1",
+				"http://qn.qihuishou.club/banner2",
+				"http://qn.qihuishou.club/banner3.png",
+			],
 		}
-		this.handlePress = this.handlePress.bind(this)
-		this.getCurrentImgIndex = this.getCurrentImgIndex.bind(this);
-
+		this.renderItem = this.renderItem.bind(this)
 	}
 
-	handlePress(el) {
-		let { title, url } = el
-		NavigationUtil.goPage("WebviewPage", {
-			"link": url,
-			"title": title
-		})
-	}
+	renderItem({ item, index }) {
+		return (
+			<TouchableOpacity activeOpacity={1} onPress={() => {
 
-	getCurrentImgIndex(imageIndex) {
-		this.setState({ currentBannerIndex: imageIndex })
+			}} >
+				<LazyImage source={item} style={styles.imgBanner} />
+
+			</TouchableOpacity>
+		)
 	}
 
 	render() {
-		const { bannerArr } = this.props;
-		if (!bannerArr.length) {
-			return <View style={styles.defaultBg} />;
-		}
 		return (
 			<View style={styles.bannerContainer}>
-				<Swiper
-					style={styles.imgCarousel}
-					horizontal={true}
-					loop={true}
+				<Carousel
+					ref={(c) => {
+						this._carousel = c
+					}}
+					data={this.state.bannerList}
+					renderItem={this.renderItem}
+					sliderWidth={DEVICE_WIDTH * 0.93}
+					itemWidth={DEVICE_HEIGHT * 0.93}
 					autoplay={true}
-					showsPagination={false}
-					removeClippedSubviews={false} // 处理ios切换页面白屏
-					onIndexChanged={this.getCurrentImgIndex}
-				>
-					{bannerArr.map(el => {
-						return (
-							<TouchableOpacity key={el.id} activeOpacity={1} onPress={() => this.handlePress(el)} >
-								<LazyImage source={el.imagePath} style={styles.imgBanner} />
-							</TouchableOpacity>
-						)
-					})}
-				</Swiper>
+					layout={'default'}
+					loop={true}
+				/>
 			</View>
-		);
-
+		)
 	}
 }
 
-const defaultProps = {
-	bannerArr: []
-}
 
-Banner.defaultProps = defaultProps
-
-export default Banner;
-
-
-const imageHeight = dp(380);
+const imageHeight = dp(280)
 const styles = StyleSheet.create({
-	defaultBg: {
-		height: imageHeight,
-		backgroundColor: Color.PAGEBGCOLOR,
-	},
 	bannerContainer: {
 		height: imageHeight,
-		backgroundColor: Color.PAGEBGCOLOR,
+		backgroundColor: Color.pageColor,
+		alignItems: 'center',
+		justifyContent: 'center'
 	},
-	imgCarousel: {
+	imageCarousel: {
 		height: imageHeight,
 	},
 	imgBanner: {
-		width: DEVICE_WIDTH,
+		width: DEVICE_WIDTH * 0.93,
 		height: imageHeight,
 		resizeMode: 'stretch',
-	},
-	bannerHint: {
-		flex: 1,
-		width: DEVICE_WIDTH,
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-		paddingHorizontal: dp(20),
-		backgroundColor: 'rgba(0,0,0,0.3)',
-		height: dp(50),
-		bottom: 0,
-		left: 0,
-		position: 'absolute',
-	},
-	bannerText: {
-		color: Color.WHITE,
-		fontSize: dp(28),
-	},
-});
+		borderRadius: dp(20)
+	}
+
+})
